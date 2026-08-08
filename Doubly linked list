@@ -1,0 +1,163 @@
+#include <stdio.h>
+#include <stdlib.h>
+void append();
+void display();
+int length();
+void add_begin();
+void insert_loc();
+void delet();
+
+struct node
+{int data;
+struct node *left;
+struct node *right;
+};
+struct node *root=NULL;
+
+int main()
+{int i,n;
+printf("How many node you want to append");
+scanf("%d",&n);
+for(i=1;i<=n;i++)
+{
+    append();
+}
+display();
+add_begin();
+display();
+insert_loc();
+display();
+delet();
+display();
+return 0;
+}
+void append()
+{struct node *temp;
+temp=(struct node*)malloc(sizeof(struct node));
+printf("enter the node value\n");
+scanf("%d",&temp->data);
+temp->left=NULL;
+temp->right=NULL;
+
+if(root==NULL)
+{root=temp;
+}
+else
+{struct node *p;
+p=root;
+while(p->link!=NULL)
+{p=p->right;
+}
+p->right=temp;
+temp->left=p;
+}
+}
+
+void display()
+{struct node *p;
+p=root;
+while(p!=NULL)
+{printf("%d->->",p->data);
+p=p->right;
+}
+}
+int length()
+{int c=0;
+struct node *p;
+p=root;
+while(p!=NULL)
+{c=c+1;
+p=p->right;
+}
+printf("length of the linklist is",c);
+return c;
+}
+
+void add_begin()
+{struct node *temp;
+temp=(struct node*)malloc(sizeof(struct node));
+printf("enter the node value");
+scanf("%d",&temp->data);
+temp->left=NULL;
+temp->right=NULL;
+if(root==NULL)
+{
+    root=temp;
+}
+else
+{temp->right=root;
+temp->left=root;
+root=temp;
+}
+}
+void insert_loc()
+{struct node *temp;
+temp=(struct node*)malloc(sizeof(struct node));
+printf("enter a value of node");
+scanf("%d",&temp->data);
+temp->left=NULL;
+temp->right=NULL;
+
+if(root==NULL)
+{root=temp;
+}
+else
+{int loc;
+int i=1;
+struct node *p;
+struct node *q;
+printf("enter the location to add a node");
+scanf("%d",&loc);
+if(loc<=length())
+{p=root;
+while(i<loc-1)
+
+{p=p->link;
+i++;
+}
+q=p->right;
+temp->right=p->right;
+q->left=temp;
+p->right=temp;
+}}
+}
+
+void delet()
+{int loc;
+struct node *p;
+int i=1;
+printf("enter the node location you want to delete");
+scanf("%d",&loc);
+if(loc<length())
+{
+    if(loc==1)
+    {p=root;
+    root=root->right;
+    p->right=NULL;
+    free(p);
+    }
+    else
+    {struct node *p;
+    struct node *q;
+    struct node *r;
+    p=root;
+
+    while(i<loc-1)
+    {p=p->right;
+    i++;
+    }
+
+    q=p->right;
+    r=q->right;
+    p->right=q->right;
+    r->left=q->left;
+    q->right=NULL;
+    q->left=NULL;
+    free(q);
+    }
+}
+else
+{
+    printf("node not available");
+}
+}
