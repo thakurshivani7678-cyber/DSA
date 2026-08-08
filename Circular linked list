@@ -1,0 +1,132 @@
+#include <stdio.h>
+#include <stdlib.h>
+void append();
+void display();
+int length();
+void insert_loc();
+void delet();
+
+struct node
+{int data;
+struct node *link;
+};
+struct node *tail=NULL;
+
+int main()
+{int i,n;
+printf("How many node you want to append ");
+scanf("%d",&n);
+for(i=1;i<=n;i++)
+{
+    append();
+}
+display();
+
+length();
+display();
+insert_loc();
+display();
+delet();
+display();
+return 0;
+}
+void append()
+{struct node *temp;
+temp=(struct node*)malloc(sizeof(struct node));
+printf("enter the node value\n");
+scanf("%d",&temp->data);
+temp->link=NULL;
+
+if(tail==NULL)
+{tail=temp;
+tail->link=temp;
+}
+else
+{
+    temp->link=tail->link;
+    tail->link=temp;
+    tail=temp;
+}}
+
+
+void display()
+{struct node *p;
+p=tail->link;
+do
+{printf("%d->->",p->data);
+p=p->link;
+}
+while(p!=tail->link);
+}
+
+int length()
+{int c=0;
+struct node *p;
+p=tail;
+
+do{
+    c++;
+    p=p->link;
+}
+while(p!=tail);
+
+printf("length of the linklist is",c);
+return c;
+}
+
+void insert_loc()
+{struct node *temp;
+temp=(struct node*)malloc(sizeof(struct node));
+printf("enter a value of node");
+scanf("%d",&temp->data);
+temp->link=NULL;
+
+if(tail==NULL)
+{tail=temp;
+}
+else
+{int loc;
+int i=1;
+struct node *p;
+printf("enter the location to add a node");
+scanf("%d",&loc);
+if(loc<=length())
+{p=tail->link;
+while(i<loc-1)
+
+{p=p->link;
+i++;
+}
+temp->link=p->link;
+p->link=temp;
+}}
+}
+
+void delet()
+{int loc;
+struct node *p,*q;
+int i=1;
+p=tail->link;
+printf("enter the node location you want to delete");
+scanf("%d",&loc);
+if(loc<length())
+{
+    if(loc==1)
+    {p=tail->link;
+    tail=tail->link;
+    p->link=NULL;
+    free(p);
+    }
+    else
+    {
+    p=tail->link;
+    while(i<loc-1)
+    {p=p->link;
+    i++;
+    }
+    q=p->link;
+    p->link=q->link;
+    q->link=NULL;
+    free(q);
+    }}
+}
