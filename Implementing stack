@@ -1,0 +1,63 @@
+#include <stdio.h>
+#define MAX 10
+int st[MAX];
+int top=-1;
+int i;
+int y;
+
+void push(int z)
+{
+    if(top==MAX-1)
+    {
+        printf("Stack is full cannot push the value");
+    }
+    else
+     {
+        top=top+1;
+        st[top]=z;
+        }
+}
+
+void pop()
+{
+    if(top== -1)
+    {printf("stack is empty cannot pop the element");
+    }
+    
+    else{
+        int y;
+        y=st[top];
+        top=top-1;
+        printf("popped item is %d\n",y);
+    }
+}
+
+void peek()
+{
+    y=st[top];
+    printf("Top element of the stack is %d",y);
+}
+
+void traverse()
+{
+    printf("The stack is:\n");
+    for(i=top; i>=0; i--)
+    {
+         printf("%d \n",st[i]);
+    }
+}
+
+int main() {
+    push(1);
+    push(2);
+    push(3);
+    push(4);
+    push(5);
+    traverse();
+    pop();
+    traverse();
+    pop();
+    traverse();
+    peek();
+    return 0;
+}
