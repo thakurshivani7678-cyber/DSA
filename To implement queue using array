@@ -1,0 +1,73 @@
+#include <stdio.h>
+#define Size 10
+int Queue[Size];
+int F=-1;//front
+int R=-1;//Rare
+int i;
+int num;
+
+void Enqueue(int x)
+{
+    if(R==Size-1)
+    {
+        printf("Queue is full cannot push element");
+    }
+    
+    else
+    {
+        R=R+1;
+        Queue[R]=x;
+        if(F==-1)
+        {
+            F=0;
+        }
+    }
+}
+
+void Dequeue()
+{
+    if(F==-1)
+    {
+        printf("Queue is empty cannot pop element");
+    }
+    
+    else
+    {
+        num=Queue[F];
+        F=F+1;
+        printf("deleted element is %d\n",num);
+    }
+    if(F>R)
+    {
+        F=-1;
+        R=-1;
+    }
+}
+
+void Traverse()
+{
+    if(F==-1)
+    {printf("Queue is empty cannot traverse");}
+    else
+    {printf("Elements of the Queue are\n");
+        for(i=F; i<=R; i++)
+        { 
+            printf("%d\n",Queue[i]);
+        }
+    }
+    
+}
+
+int main()
+{
+    Enqueue(25);
+    Enqueue(24);
+    Enqueue(23);
+    Enqueue(22);
+    Enqueue(21);
+    Dequeue();
+    Dequeue();
+    Enqueue(34);
+    Traverse();
+    return 0;
+}    
