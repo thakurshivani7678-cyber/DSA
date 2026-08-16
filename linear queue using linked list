@@ -1,0 +1,110 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+// Structure of a node
+struct Node
+{
+    int data;
+    struct Node *next;
+};
+
+// Front and Rear pointers
+struct Node *F = NULL;  // Front
+struct Node *R = NULL;  // Rear
+
+// Enqueue operation
+void Enqueue(int x)
+{
+    struct Node *newNode;
+
+    newNode = (struct Node *)malloc(sizeof(struct Node));
+
+    if (newNode == NULL)
+    {
+        printf("Queue is full, cannot insert element\n");
+        return;
+    }
+
+    newNode->data = x;
+    newNode->next = NULL;
+
+    if (F == NULL)
+    {
+        F = newNode;
+        R = newNode;
+    }
+    else
+    {
+        R->next = newNode;
+        R = newNode;
+    }
+}
+
+//dequeue operation
+void Dequeue()
+{
+    struct Node *temp;
+    int num;
+   //if queue is empty
+    if (F == NULL)
+    {
+        printf("Queue is empty, cannot delete element\n");
+        return;
+    }
+
+    temp = F;
+    num = F->data;
+
+    F = F->next;
+
+    // If queue becomes empty
+    if (F == NULL)
+    {
+        R = NULL;
+    }
+
+    free(temp);
+
+    printf("Deleted element is %d\n", num);
+}
+
+// Traverse operation
+void Traverse()
+{
+    struct Node *temp;
+
+    if (F == NULL)
+    {
+        printf("Queue is empty, cannot traverse\n");
+        return;
+    }
+
+    printf("Elements of the Queue are\n");
+
+    temp = F;
+
+    while (temp != NULL)
+    {
+        printf("%d\n", temp->data);
+        temp = temp->next;
+    }
+}
+
+// Main function
+int main()
+{
+    Enqueue(25);
+    Enqueue(24);
+    Enqueue(23);
+    Enqueue(22);
+    Enqueue(21);
+
+    Dequeue();
+    Dequeue();
+
+    Enqueue(34);
+
+    Traverse();
+
+    return 0;
+}
